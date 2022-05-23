@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StatCube</string>
+    <string name="view_all"><u>View All</u></string>
 </resources>
