@@ -8,6 +8,10 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/all_courses_item.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/recommended_item.xml" value="0.363922119140625" />
+        <entry key="app/src/main/res/layout/view_all_courses.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/view_all_item.xml" value="0.22708333333333333" />
       </map>
     </option>
   </component>
