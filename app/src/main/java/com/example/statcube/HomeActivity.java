@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.statcube.adapter.AllCoursesAdapter;
+import com.example.statcube.adapter.RecommendedAdapter;
+import com.example.statcube.model.Course;
+
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {

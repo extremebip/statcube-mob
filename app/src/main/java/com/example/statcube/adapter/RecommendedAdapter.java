@@ -1,4 +1,4 @@
-package com.example.statcube;
+package com.example.statcube.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.statcube.R;
 
 import java.util.ArrayList;
 

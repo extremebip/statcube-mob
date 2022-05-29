@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StatCube">
-        <activity android:name=".PaymentActicity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".PaymentActicity" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".HomeActivity"
@@ -20,12 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".WelcomeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

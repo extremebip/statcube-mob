@@ -1,4 +1,4 @@
-package com.example.statcube;
+package com.example.statcube.model;
 
 public class Course {
     private String courseID;

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="switch_gender_text_size">18sp</dimen>
+    <dimen name="switch_gender_height">34dp</dimen>
+    <dimen name="switch_gender_track_width">320dp</dimen>
+    <dimen name="switch_gender_thumb_width">160dp</dimen>
+</resources>
