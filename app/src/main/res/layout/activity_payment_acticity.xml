@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".PaymentActicity"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="34dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/cornerstyle"
+        android:backgroundTint="@color/light_grey2"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Payment Confirmation"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/payment_price"
+            android:text="IDR 500.000"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/payment_month"
+            android:text="1 month"
+            android:gravity="center"
+            android:textSize="15sp"
+            />
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinner_payments"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/cornerstyle"
+        android:backgroundTint="@color/light_grey"
+        android:paddingLeft="20dp"
+        android:paddingVertical="4dp"
+        />
+
+    <Button
+        android:layout_marginTop="50dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/red"
+        android:text="Confirm"
+        android:theme="@style/redbutton"/>
+
+
+</LinearLayout>

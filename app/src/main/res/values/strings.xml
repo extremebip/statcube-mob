@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">StatCube</string>
     <string name="view_all"><u>View All</u></string>
+    <string-array name="payment">
+        <item>Choose payment method</item>
+        <item>BCA</item>
+        <item>BNI</item>
+        <item>MANDIRI</item>
+        <item>CIMB NIAGA</item>
+        <item>DBS</item>
+    </string-array>
 </resources>

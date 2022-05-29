@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StatCube">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".PaymentActicity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".HomeActivity"
             android:exported="true">
@@ -21,10 +22,10 @@
         </activity>
         <activity
             android:name=".WelcomeActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
