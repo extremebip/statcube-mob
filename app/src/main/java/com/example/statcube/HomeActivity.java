@@ -66,7 +66,8 @@ public class HomeActivity extends AppCompatActivity {
         btnViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // pindah ke halaman view all
+                Intent intent = new Intent(HomeActivity.this, AllCourseActivity.class);
+                startActivity(intent);
             }
         });
 
