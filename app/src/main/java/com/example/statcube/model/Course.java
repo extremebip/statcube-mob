@@ -1,37 +1,33 @@
 package com.example.statcube.model;
 
 public class Course {
-    private String courseID;
-    private String adminID;
-    private String topicID;
-    private String title;
-    private String description;
+    private Integer courseID;
+    private Integer adminID;
+    private String courseTitle;
+    private String courseDescription;
 
-    public Course(String courseID, String adminID, String topicID, String title, String description) {
+    public Course(Integer courseID, Integer adminID, String courseTitle, String courseDescription) {
         this.courseID = courseID;
         this.adminID = adminID;
-        this.topicID = topicID;
-        this.title = title;
-        this.description = description;
+        this.courseTitle = courseTitle;
+        this.courseDescription = courseDescription;
     }
 
-    public String getCourseID() { return courseID; }
+    public Course(Integer courseID) { this.courseID = courseID; }
 
-    public void setCourseID(String courseID) { this.courseID = courseID; }
+    public Integer getCourseID() { return courseID; }
 
-    public String getAdminID() { return adminID; }
+    public void setCourseID(Integer courseID) { this.courseID = courseID; }
 
-    public void setAdminID(String adminID) { this.adminID = adminID; }
+    public Integer getAdminID() { return adminID; }
 
-    public String getTopicID() { return topicID; }
+    public void setAdminID(Integer adminID) { this.adminID = adminID; }
 
-    public void setTopicID(String topicID) { this.topicID = topicID; }
+    public String getCourseTitle() { return courseTitle; }
 
-    public String getTitle() { return title; }
+    public void setCourseTitle(String courseTitle) { this.courseTitle = courseTitle; }
 
-    public void setTitle(String title) { this.title = title; }
+    public String getCourseDescription() { return courseDescription; }
 
-    public String getDescription() { return description; }
-
-    public void setDescription(String description) { this.description = description; }
+    public void setCourseDescription(String courseDescription) { this.courseDescription = courseDescription; }
 }

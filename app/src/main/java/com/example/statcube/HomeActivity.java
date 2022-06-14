@@ -29,24 +29,11 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // ini nanti dihapus
-        titlesRecommended.add("Time Series Analysis");
-        titlesRecommended.add("Statistical Process Control");
-        titlesRecommended.add("Structural Equation Model");
-        titlesRecommended.add("Categorical Data Analysis");
-        titlesRecommended.add("Econometics");
-        authorsRecommended.add("Dewi Puspita Tanurezal");
-        authorsRecommended.add("Anthony Gilrandy Theo");
-        authorsRecommended.add("Steven");
-        authorsRecommended.add("Syntia Firdaus");
-        authorsRecommended.add("Devita");
-        courses.add(new Course("CR001", "AD001", "TP001", "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course("CR002", "AD001", "TP001", "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course("CR003", "AD001", "TP001", "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course("CR004", "AD001", "TP001", "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course("CR005", "AD001", "TP001", "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course("CR006", "AD001", "TP001", "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course("CR007", "AD001", "TP001", "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-
+        for(int i = 1; i < 12; i++){
+            titlesRecommended.add("temporary title recommended");
+            authorsRecommended.add("temporary author recommended");
+            courses.add(new Course(i, 1, "Course Title", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
+        }
 
         btnViewAll = findViewById(R.id.btn_view_all);
         rvRecommended = findViewById(R.id.rv_recommended);
@@ -66,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         AllCoursesAdapter allCoursesAdapter = new AllCoursesAdapter(this, courses);
         rvAllCourses.setAdapter(allCoursesAdapter);
         rvAllCourses.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-
 
     }
 }

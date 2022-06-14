@@ -1,15 +1,13 @@
 package com.example.statcube.model;
 
-import java.util.Date;
-
 public class User {
-    private int UserID;
+    private Integer UserID;
     private String UserName;
     private String UserEmail;
     private String UserPassword;
-    private Date UserSubscriptionEndDate;
+    private String UserSubscriptionEndDate;
 
-    public User(int userID, String userName, String userEmail, String userPassword, Date userSubscriptionEndDate) {
+    public User(Integer userID, String userName, String userEmail, String userPassword, String userSubscriptionEndDate) {
         UserID = userID;
         UserName = userName;
         UserEmail = userEmail;
@@ -17,39 +15,25 @@ public class User {
         UserSubscriptionEndDate = userSubscriptionEndDate;
     }
 
-    public int getUserID() {
-        return UserID;
-    }
+    public User(Integer userID) { UserID = userID; }
 
-    public String getUserName() {
-        return UserName;
-    }
+    public Integer getUserID() { return UserID; }
 
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
+    public void setUserID(Integer userID) { UserID = userID; }
 
-    public String getUserEmail() {
-        return UserEmail;
-    }
+    public String getUserName() { return UserName; }
 
-    public void setUserEmail(String userEmail) {
-        UserEmail = userEmail;
-    }
+    public void setUserName(String userName) { UserName = userName; }
 
-    public String getUserPassword() {
-        return UserPassword;
-    }
+    public String getUserEmail() { return UserEmail; }
 
-    public void setUserPassword(String userPassword) {
-        UserPassword = userPassword;
-    }
+    public void setUserEmail(String userEmail) { UserEmail = userEmail; }
 
-    public Date getUserSubscriptionEndDate() {
-        return UserSubscriptionEndDate;
-    }
+    public String getUserPassword() { return UserPassword; }
 
-    public void setUserSubscriptionEndDate(Date userSubscriptionEndDate) {
-        UserSubscriptionEndDate = userSubscriptionEndDate;
-    }
+    public void setUserPassword(String userPassword) { UserPassword = userPassword; }
+
+    public String getUserSubscriptionEndDate() { return UserSubscriptionEndDate; }
+
+    public void setUserSubscriptionEndDate(String userSubscriptionEndDate) { UserSubscriptionEndDate = userSubscriptionEndDate; }
 }
