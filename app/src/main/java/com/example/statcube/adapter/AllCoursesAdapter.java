@@ -1,6 +1,8 @@
 package com.example.statcube.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.statcube.CourseDetailActivity;
 import com.example.statcube.model.Course;
 import com.example.statcube.R;
 
@@ -29,18 +32,23 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
     @Override
     public AllCoursesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.all_courses_item, parent, false);
-        return new AllCoursesAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AllCoursesAdapter.ViewHolder holder, int position) {
-        holder.tvTitle.setText(courses.get(position).getCourseTitle());
-        holder.tvDescription.setText(courses.get(0).getCourseDescription());
+        Course course = courses.get(position);
+        holder.tvTitle.setText(course.getCourseTitle());
+        holder.tvDescription.setText(course.getCourseDescription());
 
         holder.cvAllCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // kalo coursenya di klik
+                Intent intent = new Intent(context, CourseDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("course", course);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }
@@ -51,10 +59,8 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView tvTitle, tvDescription;
         CardView cvAllCourses;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);

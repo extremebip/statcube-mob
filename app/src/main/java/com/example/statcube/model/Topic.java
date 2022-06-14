@@ -1,6 +1,8 @@
 package com.example.statcube.model;
 
-public class Topic {
+import java.io.Serializable;
+
+public class Topic implements Serializable {
     private Integer topicID;
     private Integer courseID;
     private String topicTitle;

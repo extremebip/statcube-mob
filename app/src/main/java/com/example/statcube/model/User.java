@@ -1,6 +1,8 @@
 package com.example.statcube.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer UserID;
     private String UserName;
     private String UserEmail;
