@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StatCube">
+        <activity android:name=".AddDiscussionActivity"></activity>
+        <activity android:name=".DiscussionDetailActivity" />
+        <activity android:name=".DiscussionActivity" />
         <activity
             android:name=".TopicDetailActivity"
             android:exported="false" />

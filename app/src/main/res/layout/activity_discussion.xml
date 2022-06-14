@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="start"
+    android:paddingHorizontal="18dp"
+    android:paddingVertical="25dp"
+    tools:context=".DiscussionActivity">
+
+    <TextView
+        android:text="Discussion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <Button
+        android:id="@+id/btn_add_discussion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Discussion"
+        android:backgroundTint="@color/red"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_discussions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
