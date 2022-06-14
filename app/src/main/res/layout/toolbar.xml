@@ -6,21 +6,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="15dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="7dp"
             android:src="@drawable/back"
             android:id="@+id/back_arrow"/>
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="StatCube"
+            android:textSize="25dp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
         <ImageView
+            android:paddingTop="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/hamb_menu"
