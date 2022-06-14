@@ -5,120 +5,157 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.statcube.api.APIHelper;
+import com.example.statcube.api.APIResult;
+import com.example.statcube.model.User;
+import com.example.statcube.model.validation.EmailRule;
+import com.example.statcube.model.validation.PasswordRule;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    //buat gw pake nanti
+    Button btnlogin, btnrediregister;
+    EditText log_email, log_pass;
+    int userid=-1;
 
-
-//    Button btnlogin, btnrediregister;
-//    EditText log_email, log_pass;
-//    ArrayList<Database> database  = new ArrayList<>();
-//    int userid=-1;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//
-//        btnlogin = findViewById(R.id.btn_login);
-//        btnrediregister = findViewById(R.id.btn_redi_register);
-//        log_email = findViewById(R.id.login_email);
-//        log_pass = findViewById(R.id.login_password);
-//
-//        ArrayList<Database> temp  = new ArrayList<>();
-//        temp = (ArrayList<Database>)getIntent().getSerializableExtra("userdetails");
-//
-//        if(temp!=null)
-//        {
-//            for(int i=0;i<temp.size();i++)
-//            {
-//                String tempemail = temp.get(i).getEmail();
-//                String temppassword = temp.get(i).getPassword();
-//                String tempphonenumber = temp.get(i).getPhonenumber();
-//                ArrayList tempfavorite = temp.get(i).getFavorite();
-//                database.add(new Database(tempemail,temppassword,tempphonenumber,tempfavorite));
-//            }
-//        }
-//
-//        btnlogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String email =log_email.getText().toString();
-//                String password = log_pass.getText().toString();
-//
-//                boolean validateemail = false;
-//                boolean validatepassword=false;
-//
-//
-//                if(database!=null) {
-//                    for (int i = 0; i < database.size(); i++) {
-//                        String reg_email = database.get(i).getEmail();
-//                        String reg_password = database.get(i).getPassword();
-//                        if (reg_email.equals(email)) {
-//                            validateemail = true;
-//                        }
-//                        if (email.equals(reg_email) && password.equals(reg_password)) {
-//                            validatepassword = true;
-//                            userid=i;
-//                        }
-//                    }
-//                }
-//
-//                if(validatepassword==true)
-//                {
-//                    Intent intent2= new Intent(LoginActivity.this, CampusActivity.class);
-//                    intent2.putExtra("userdetails",database);
-//                    intent2.putExtra("userid",userid);
-//                    startActivity(intent2);
-//                }
-//                else
-//                {
-//                    String message = "";
-//                    if(!validateemail)
-//                    {
-//                        message = message + "Email does not exist";
-//                    }
-//                    if(!validatepassword && validateemail)
-//                    {
-//                        message =message + "Incorrect Password";
-//                    }
-//                    AlertDialog.Builder builder =new AlertDialog.Builder(LoginActivity.this);
-//                    builder.setTitle("Error Message");
-//                    builder.setMessage(message);
-//                    AlertDialog dialog = builder.create();
-//                    dialog.show();
-//                }
-//            }
-//        });
-//
-//        btnrediregister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent= new Intent(LoginActivity.this, RegisterActivity.class);
-//                intent.putExtra("userdetails", database);
-//                Toast toast = Toast.makeText(LoginActivity.this, "Redirecting to register page\n", Toast.LENGTH_SHORT);
-//                toast.show();
-//                startActivity(intent);
-//            }
-//        });
-//    }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        Intent intent2= new Intent(LoginActivity.this, LoginActivity.class);
-//        intent2.putExtra("userdetails",database);
-//        intent2.putExtra("userid",userid);
-//        startActivity(intent2);
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        btnlogin = findViewById(R.id.btn_login);
+//        btnrediregister = findViewById(R.id.btn_redi_register);
+        log_email = findViewById(R.id.login_email);
+        log_pass = findViewById(R.id.login_password);
+
+        btnlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = log_email.getText().toString();
+                String password = log_pass.getText().toString();
+
+                boolean validateemail = validateEmail(email);
+                boolean validatepassword = validatePassword(password);
+
+                if (!validateemail || !validatepassword) {
+                    return;
+                }
+
+                Map<String, String> body = new HashMap<String, String>();
+                body.put("UserEmail", email);
+                body.put("UserPassword", password);
+
+                RequestQueue rq = Volley.newRequestQueue(LoginActivity.this);
+
+                StringRequest jor = APIHelper.createPostRequest(APIHelper.BASE_URL + "users/login", body, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        User user = null;
+                        try {
+                            APIResult result = new APIResult(new JSONObject(response));
+                            JSONObject userResult = (JSONObject) result.getResult();
+                            int UserID = userResult.getInt("UserID");
+                            String UserName = userResult.getString("UserName");
+                            Log.i("Username", "Username: " + UserName);
+                            String UserEmail = userResult.getString("UserEmail");
+                            String UserSubscriptionEndDate = userResult.getString("UserSubscriptionEndDate");
+                            // TODO: Parsing Date
+                            user = new User(UserID, UserName, UserEmail, null, null);
+                        } catch (JSONException e) { }
+                        // TODO: Pasangin session user
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        NetworkResponse response = error.networkResponse;
+                        String dialogMessage = "Login Failed";
+                        if (error instanceof ServerError && response != null) {
+                            try {
+                                String res = new String(response.data,
+                                        HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                                JSONObject obj = new JSONObject(res);
+                                APIResult result = new APIResult(obj);
+                                Object messages = result.getMessage();
+                                if (result.getMessageType().equals("string"))  {
+                                    dialogMessage = (String) messages;
+                                } else {
+                                    JSONObject objectMessages = (JSONObject) messages;
+                                    JSONObject errMessages = objectMessages.getJSONObject("errors");
+                                    if (errMessages.has("UserEmail")) {
+                                        dialogMessage = errMessages.getString("UserEmail");
+                                    } else if (errMessages.has("UserPassword")) {
+                                        dialogMessage = errMessages.getString("UserPassword");
+                                    } else {
+                                        dialogMessage = "Login Failed";
+                                    }
+                                }
+                            } catch (UnsupportedEncodingException e1) {
+                                Log.e("API Error", "API Error");
+                            } catch (JSONException e2) {
+                                Log.e("API Error", "API Error");
+                            }
+                        }
+                        AlertDialog.Builder builder =new AlertDialog.Builder(LoginActivity.this);
+                        builder.setTitle("Error Message");
+                        builder.setMessage(dialogMessage);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                });
+
+                rq.add(jor);
+            }
+        });
+
+//        btnrediregister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent= new Intent(LoginActivity.this, RegisterActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+    }
+
+    private boolean validateEmail(String email){
+        EmailRule rule = new EmailRule(email);
+        rule.validate();
+        log_email.setError(null);
+        if (!rule.isValid()){
+            log_email.setError(rule.getErrorMessage());
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validatePassword(String password){
+        log_pass.setError(null);
+        if (password.isEmpty()){
+            log_pass.setError("Password must not be empty");
+            return false;
+        }
+        return true;
     }
 }

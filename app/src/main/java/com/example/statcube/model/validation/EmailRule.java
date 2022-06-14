@@ -32,15 +32,19 @@ public class EmailRule extends Rule {
             return false;
         }
 
-        if (!email.endsWith(".com") || email.endsWith("@")){
+        if (email.endsWith("@")){
             return false;
         }
 
-        if (email.startsWith("@") || email.startsWith(".")){
+        if (email.startsWith("@") || email.startsWith(".") || email.endsWith(".")){
             return false;
         }
 
         String afterAtStr = email.substring(firstAtCharIdx + 1);
-        return !afterAtStr.contains("@");
+
+        if (afterAtStr.startsWith(".") || afterAtStr.contains("@")) {
+            return false;
+        }
+        return afterAtStr.contains(".");
     }
 }
