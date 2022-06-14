@@ -34,8 +34,8 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AllCoursesAdapter.ViewHolder holder, int position) {
-        holder.tvTitle.setText(courses.get(position).getTitle());
-        holder.tvDescription.setText(courses.get(0).getDescription());
+        holder.tvTitle.setText(courses.get(position).getCourseTitle());
+        holder.tvDescription.setText(courses.get(0).getCourseDescription());
 
         holder.cvAllCourses.setOnClickListener(new View.OnClickListener() {
             @Override
