@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
-    ArrayList<String> titlesRecommended = new ArrayList<>();
-    ArrayList<String> authorsRecommended = new ArrayList<>();
+    ArrayList<String> titlesRecommended = new ArrayList<>(); // courseRecommended
+    ArrayList<String> authorsRecommended = new ArrayList<>(); // authorRecommended
     ArrayList<Course> courses = new ArrayList<>();
 
     TextView btnViewAll,tbtitle;
