@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class PaymentActicity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_acticity);
+        setContentView(R.layout.activity_payment_activity);
 
 
         Spinner spinnerPayment =findViewById(R.id.spinner_payments);
