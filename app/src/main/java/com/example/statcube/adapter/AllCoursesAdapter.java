@@ -47,9 +47,7 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CourseDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("course", course);
-                intent.putExtras(bundle);
+                intent.putExtra("CourseID", courses.get(position).getCourseID());
                 context.startActivity(intent);
             }
         });

@@ -6,10 +6,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.statcube.adapter.CourseAdapter;
+import com.example.statcube.api.APIHelper;
+import com.example.statcube.api.APIResult;
 import com.example.statcube.model.Course;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -45,16 +57,7 @@ public class SearchActivity extends AppCompatActivity {
         courseRecycler.setLayoutManager(new LinearLayoutManager(this));
         courses = new ArrayList<>();
 
-        // ini nanti diapus
-        courses.add(new Course(1,1, "Course Title Temporary", "Course Description Temporary"));
-        courses.add(new Course(2,1, "Course Title Dewi", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course(3,1, "Course Title Devita", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course(4,1, "Course Title Anthony", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course(5,1, "Course Title Wongs", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course(6,1, "Course Title Nicho", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course(7,1, "Course Title Icham", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-        courses.add(new Course(8,1, "Course Title Mob Prog", "Course Description - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis"));
-
+        fetchAllCourses();
         courseAdapter = new CourseAdapter(this);
         courseAdapter.setCourses(courses);
         courseRecycler.setAdapter(courseAdapter);
@@ -76,5 +79,36 @@ public class SearchActivity extends AppCompatActivity {
             courseAdapter.setCourses(filteredList);
             courseAdapter.notifyDataSetChanged();
         }
+    }
+
+    private void fetchAllCourses() {
+        RequestQueue rq = Volley.newRequestQueue(SearchActivity.this);
+        StringRequest sr = APIHelper.createGetRequest(APIHelper.BASE_URL + "courses", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    APIResult result = new APIResult(new JSONObject(response));
+                    JSONArray coursesArr = (JSONArray) result.getResult();
+                    ArrayList<Course> courses = new ArrayList<>();
+                    for (int i = 0; i < coursesArr.length(); i++) {
+                        JSONObject courseObj = coursesArr.getJSONObject(i);
+                        int CourseID = courseObj.getInt("CourseID");
+                        int AdminID = courseObj.getInt("AdminID");
+                        String CourseTitle = courseObj.getString("CourseTitle");
+                        String CourseDescription = courseObj.getString("CourseDescription");
+                        Course course = new Course(CourseID, AdminID, CourseTitle, CourseDescription);
+                        courses.add(course);
+                    }
+                    courseAdapter.setCourses(courses);
+                    courseAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    Log.e("Error", "Parsing JSON Error");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) { }
+        });
+        rq.add(sr);
     }
 }

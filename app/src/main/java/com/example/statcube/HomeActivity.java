@@ -170,11 +170,9 @@ public class HomeActivity extends AppCompatActivity {
                 try {
                     APIResult result = new APIResult(new JSONObject(response));
                     JSONArray coursesArr = (JSONArray) result.getResult();
-                    ArrayList<Course> courses = new ArrayList<>();
                     for (int i = 0; i < coursesArr.length(); i++) {
                         JSONObject courseObj = coursesArr.getJSONObject(i);
                         int CourseID = courseObj.getInt("CourseID");
-                        // int AuthorID = courseObj.getInt("AuthorID");
                         String CourseAuthor = courseObj.getString("CourseAuthor");
                         String CourseTitle = courseObj.getString("CourseTitle");
                         String CourseDescription = courseObj.getString("CourseDescription");
