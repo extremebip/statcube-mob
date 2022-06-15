@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class DiscussionActivity extends AppCompatActivity {
+public class DiscussionActivity extends ToolBarActivity {
 
     Button btnadddiscussion;
 
@@ -15,6 +15,7 @@ public class DiscussionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussion);
+        initializeToolBar("Discussion",1);
 
         btnadddiscussion = findViewById(R.id.btn_add_discussion);
 

@@ -10,72 +10,69 @@
     tools:context=".HomeActivity">
     <include layout="@layout/toolbar"/>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="24dp"
-    tools:context=".HomeActivity">
-
-    <TextView
-        android:id="@+id/tv_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Search"
-        android:textColorHint="@color/black"
-        android:background="@drawable/cornerstyle"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="18dp"
-        android:drawableLeft="@drawable/search"
-        android:drawablePadding="16dp"
-        android:backgroundTint="@color/grey_blue" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Recommended"/>
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_recommended"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="24dp"
+        tools:context=".HomeActivity">
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            android:textColorHint="@color/black"
+            android:background="@drawable/cornerstyle"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="18dp"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="16dp"
+            android:backgroundTint="@color/grey_blue" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:text="All Courses"/>
-        <View android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <TextView
-            android:id="@+id/btn_view_all"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Recommended"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recommended"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue"
-            android:text="@string/view_all"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:text="All Courses"/>
+            <View android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/btn_view_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="@string/view_all"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_all_courses"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_all_courses"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
-
-</LinearLayout>
 </LinearLayout>

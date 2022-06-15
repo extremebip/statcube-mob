@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     tools:context=".SearchActivity">
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv_search"
+    <include layout="@layout/toolbar"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/cornerstyle"
-        android:backgroundTint="@color/light_grey_blue"
-        app:queryHint="Search"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        tools:context=".SearchActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_result"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/cornerstyle"
+            android:backgroundTint="@color/light_grey_blue"
+            app:queryHint="Search"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 </LinearLayout>

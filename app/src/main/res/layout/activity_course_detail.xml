@@ -1,53 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="start"
-    android:paddingVertical="28dp"
-    android:paddingHorizontal="24dp"
     tools:context=".CourseDetailActivity">
-
-    <TextView
-        android:id="@+id/tv_title"
+    <include layout="@layout/toolbar"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="start"
+        android:paddingVertical="28dp"
+        android:paddingHorizontal="24dp"
+        tools:context=".CourseDetailActivity">
 
-    <TextView
-        android:id="@+id/tv_author"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="17dp"
-        android:padding="16dp"
-        android:layout_marginVertical="12dp"
-        android:textColor="@color/black"
-        android:background="@color/light_grey_blue"/>
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="6dp"
-        android:text="Topics"/>
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:padding="16dp"
+            android:layout_marginVertical="12dp"
+            android:textColor="@color/black"
+            android:background="@color/light_grey_blue"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_topics"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="6dp"
+            android:text="Topics"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_topics"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 </LinearLayout>

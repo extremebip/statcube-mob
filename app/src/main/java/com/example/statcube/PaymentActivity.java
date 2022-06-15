@@ -15,13 +15,14 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class PaymentActivity extends AppCompatActivity {
+public class PaymentActivity extends ToolBarActivity {
     TextView tbar_title;
     Button paybtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_activity);
+        initializeToolBar("Payment",1);
 
         Intent intent = getIntent();
 

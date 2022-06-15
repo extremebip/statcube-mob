@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StatCube">
+        <activity android:name=".ToolBarActivity"></activity>
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".AddDiscussionActivity" />
@@ -24,9 +25,12 @@
         <activity android:name=".PaymentActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".WelcomeActivity" android:exported="true" >
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

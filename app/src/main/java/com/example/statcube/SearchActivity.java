@@ -13,7 +13,7 @@ import com.example.statcube.model.Course;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends ToolBarActivity{
 
     private ArrayList<Course> courses;
     SearchView svSearch;
@@ -25,6 +25,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        initializeToolBar("Search",1);
 
         svSearch = findViewById(R.id.sv_search);
         svSearch.clearFocus();
