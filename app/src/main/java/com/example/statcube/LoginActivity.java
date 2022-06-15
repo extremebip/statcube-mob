@@ -31,12 +31,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    Button btnlogin, btnrediregister;
+    Button btnlogin;
     EditText log_email, log_pass;
     int userid = -1;
 
@@ -52,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_NAME, MODE_PRIVATE);
 
         btnlogin = findViewById(R.id.btn_login);
-//        btnrediregister = findViewById(R.id.btn_redi_register);
         log_email = findViewById(R.id.login_email);
         log_pass = findViewById(R.id.login_password);
 
@@ -84,19 +86,23 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject userResult = (JSONObject) result.getResult();
                             int UserID = userResult.getInt("UserID");
                             String UserName = userResult.getString("UserName");
-                            Log.i("Username", "Username: " + UserName);
                             String UserEmail = userResult.getString("UserEmail");
-                            String UserSubscriptionEndDate = userResult.getString("UserSubscriptionEndDate");
-                            // TODO: Parsing Date
-                            user = new User(UserID, UserName, UserEmail, null, null);
+                            String UserSubscriptionEndDateString = userResult.getString("UserSubscriptionEndDate");
+                            Date SubscriptionEndDate = null;
+                            try {
+                                SubscriptionEndDate = new SimpleDateFormat("yyyy-MM-dd").parse(UserSubscriptionEndDateString);
+                            } catch (ParseException e) {
+                                Log.e("Get Data", "Parse Date Error");
+                            }
+                            user = new User(UserID, UserName, UserEmail, null, SubscriptionEndDate);
                             userid = UserID;
                         } catch (JSONException e) { }
                         // session
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putInt(KEY_ID, userid);
-                        System.out.println("USER ID :" + userid);
                         editor.apply();
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
@@ -126,12 +132,14 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             } catch (UnsupportedEncodingException e1) {
                                 Log.e("API Error", "API Error");
+                                dialogMessage = "There is a problem with the system";
                             } catch (JSONException e2) {
                                 Log.e("API Error", "API Error");
+                                dialogMessage = "There is a problem with the system";
                             }
                         }
                         AlertDialog.Builder builder =new AlertDialog.Builder(LoginActivity.this);
-                        builder.setTitle("Error Message");
+                        builder.setTitle("Error");
                         builder.setMessage(dialogMessage);
                         AlertDialog dialog = builder.create();
                         dialog.show();
@@ -141,14 +149,6 @@ public class LoginActivity extends AppCompatActivity {
                 rq.add(jor);
             }
         });
-
-//        btnrediregister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent= new Intent(LoginActivity.this, RegisterActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private boolean validateEmail(String email){

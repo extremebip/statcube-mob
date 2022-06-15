@@ -3,9 +3,11 @@ package com.example.statcube;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -13,14 +15,30 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.statcube.api.APIHelper;
+import com.example.statcube.api.APIResult;
+import com.example.statcube.model.User;
 import com.example.statcube.model.validation.EmailRule;
 import com.example.statcube.model.validation.PasswordRule;
 import com.example.statcube.model.validation.UsernameRule;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    Switch swGender;
-    TextView tvMale, tvFemale;
     EditText etUsername, etEmail, etPassword, etConfirmPassword;
     Button btnRegister;
 
@@ -28,23 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-        swGender = findViewById(R.id.register_gender);
-        tvMale = findViewById(R.id.tv_switch_gender_male);
-        tvFemale = findViewById(R.id.tv_switch_gender_female);
-        swGender.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                if (checked) {
-                    tvMale.setVisibility(View.VISIBLE);
-                    tvFemale.setVisibility(View.GONE);
-                } else {
-                    tvMale.setVisibility(View.GONE);
-                    tvFemale.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
         initRegisterForm();
     }
@@ -66,11 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
                 boolean isValid = validateUsername(username);
                 isValid = validateEmail(email) && isValid;
                 isValid = validatePassword(password) && isValid;
-                if (isValid) {
-                    // TODO: Create User
 
-                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                if (isValid) {
+                    submitRegister(new User(0, username, email, password, null));
                 }
             }
         });
@@ -95,20 +94,6 @@ public class RegisterActivity extends AppCompatActivity {
             etEmail.setError(rule.getErrorMessage());
             return false;
         }
-
-        boolean isUnique = true;
-        // TODO: Check Unique to DB
-//        for (int i = 0; i < users.size(); i++){
-//            if (email.equals(users.get(i).getUserEmailAddress())){
-//                isUnique = false;
-//                break;
-//            }
-//        }
-
-        if (!isUnique){
-            etEmail.setError("Email must be unique");
-            return false;
-        }
         return true;
     }
 
@@ -124,9 +109,72 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = etConfirmPassword.getText().toString();
         if (!password.equals(confirmPassword)) {
             etPassword.setError("Confirm Password does not match!");
+            return false;
         } else {
             etPassword.setError(null);
         }
         return true;
+    }
+
+    private void submitRegister(User user) {
+        Map<String, String> body = new HashMap<String, String>();
+        body.put("UserName", user.getUserName());
+        body.put("UserEmail", user.getUserEmail());
+        body.put("UserPassword", user.getUserPassword());
+
+        RequestQueue rq = Volley.newRequestQueue(RegisterActivity.this);
+        StringRequest sr = APIHelper.createPostRequest(APIHelper.BASE_URL + "users", body, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse response = error.networkResponse;
+                String dialogMessage = "";
+                if (error instanceof ServerError && response != null) {
+                    try {
+                        String res = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                        JSONObject obj = new JSONObject(res);
+                        APIResult result = new APIResult(obj);
+                        Object messages = result.getMessage();
+                        if (result.getMessageType().equals("string"))  {
+                            dialogMessage = (String) messages;
+                        } else {
+                            JSONObject objectMessages = (JSONObject) messages;
+                            JSONObject errMessages = objectMessages.getJSONObject("errors");
+                            if (errMessages.has("UserName")) {
+                                etUsername.setError(errMessages.getString("UserName"));
+                            }
+                            if (errMessages.has("UserEmail")) {
+                                etEmail.setError(errMessages.getString("UserEmail"));
+                            }
+                            if (errMessages.has("UserPassword")) {
+                                etPassword.setError(errMessages.getString("UserPassword"));
+                            }
+                        }
+                    } catch (UnsupportedEncodingException e1) {
+                        Log.e("API Error", "API Error");
+                        dialogMessage = "There is a problem with the system";
+                    } catch (JSONException e2) {
+                        Log.e("API Error", "API Error");
+                        dialogMessage = "There is a problem with the system";
+                    }
+                }
+                if (!dialogMessage.isEmpty()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage(dialogMessage);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
+
+        rq.add(sr);
     }
 }

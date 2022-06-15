@@ -25,7 +25,6 @@ public class APIHelper {
             Response.Listener<String> listener,
             @Nullable Response.ErrorListener errorListener
     ) {
-//        final String body = (jsonBody != null) ? jsonBody.toString() : null;
         return new StringRequest(method, url, listener, errorListener) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

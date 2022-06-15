@@ -14,5 +14,8 @@ public class UsernameRule extends Rule {
             ErrorMessage = "Username must not be empty";
             return;
         }
+
+        IsValid = true;
+        ErrorMessage = "";
     }
 }

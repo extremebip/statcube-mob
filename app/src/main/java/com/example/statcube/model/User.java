@@ -1,15 +1,16 @@
 package com.example.statcube.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     private Integer UserID;
     private String UserName;
     private String UserEmail;
     private String UserPassword;
-    private String UserSubscriptionEndDate;
+    private Date UserSubscriptionEndDate;
 
-    public User(Integer userID, String userName, String userEmail, String userPassword, String userSubscriptionEndDate) {
+    public User(Integer userID, String userName, String userEmail, String userPassword, Date userSubscriptionEndDate) {
         UserID = userID;
         UserName = userName;
         UserEmail = userEmail;
@@ -35,7 +36,7 @@ public class User implements Serializable {
 
     public void setUserPassword(String userPassword) { UserPassword = userPassword; }
 
-    public String getUserSubscriptionEndDate() { return UserSubscriptionEndDate; }
+    public Date getUserSubscriptionEndDate() { return UserSubscriptionEndDate; }
 
-    public void setUserSubscriptionEndDate(String userSubscriptionEndDate) { UserSubscriptionEndDate = userSubscriptionEndDate; }
+    public void setUserSubscriptionEndDate(Date userSubscriptionEndDate) { UserSubscriptionEndDate = userSubscriptionEndDate; }
 }
