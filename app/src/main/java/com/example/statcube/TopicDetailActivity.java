@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class TopicDetailActivity extends AppCompatActivity {
+public class TopicDetailActivity extends ToolBarActivity {
 
     private Topic topic;
 
@@ -27,6 +27,7 @@ public class TopicDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_detail);
+        initializeToolBar("Topic",1);
 
         Intent intent = getIntent();
         topic = (Topic) intent.getSerializableExtra("topic");

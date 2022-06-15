@@ -10,19 +10,17 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-public class SubscribeActivity extends AppCompatActivity {
+public class SubscribeActivity extends ToolBarActivity {
     Button subsbtn;
-    TextView tbar_title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribe);
+        initializeToolBar("Subscribe",1);
         Intent intent = getIntent();
 
         subsbtn =findViewById(R.id.subsbutton);
-        tbar_title = findViewById(R.id.toolbar_title);
-
-        tbar_title.setText("Subscribe");
 
         subsbtn.setOnClickListener(new View.OnClickListener() {
             @Override

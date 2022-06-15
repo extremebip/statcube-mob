@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
 
-public class DiscussionActivity extends AppCompatActivity {
+public class DiscussionActivity extends ToolBarActivity {
 
     Button btnadddiscussion;
     DiscussionAdapter discussionAdapter;
@@ -33,6 +33,7 @@ public class DiscussionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussion);
+        initializeToolBar("Discussion",1);
 
         // temp
         for(int i=0; i<10; i++){

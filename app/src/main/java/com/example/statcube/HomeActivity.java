@@ -34,15 +34,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends ToolBarActivity {
 
     ArrayList<Course> coursesRecommended = new ArrayList<>(); // courseRecommended
     ArrayList<String> authorsRecommended = new ArrayList<>(); // authorRecommended
     ArrayList<Course> courses = new ArrayList<>();
 
-    TextView tvSearch, btnViewAll,tbtitle;
+    TextView tvSearch, btnViewAll;
     RecyclerView rvRecommended, rvAllCourses;
-    ImageView back_btn,hamb_menu_btn;
 
     RecommendedAdapter recommendedAdapter;
     AllCoursesAdapter allCoursesAdapter;
@@ -51,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        initializeToolBar("Home",0);
 
         fetchAllCourses();
         fetchRecommendedCourse();
@@ -59,19 +59,6 @@ public class HomeActivity extends AppCompatActivity {
         rvRecommended = findViewById(R.id.rv_recommended);
         rvAllCourses = findViewById(R.id.rv_all_courses);
         tvSearch = findViewById(R.id.tv_search);
-        tbtitle = findViewById(R.id.toolbar_title);
-        back_btn = findViewById(R.id.back_arrow);
-        back_btn.setVisibility(View.INVISIBLE);
-        hamb_menu_btn = findViewById(R.id.hamb_menu);
-
-        tbtitle.setText("Home");
-
-        hamb_menu_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showMenu(view);
-            }
-        });
 
         tvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,37 +85,6 @@ public class HomeActivity extends AppCompatActivity {
         rvAllCourses.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
 
-    }
-
-    private void showMenu(View view){
-        PopupMenu hamb_menu = new PopupMenu(HomeActivity.this,view);
-        hamb_menu.getMenuInflater().inflate(R.menu.hamburger_menu,hamb_menu.getMenu());
-        hamb_menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getItemId() == R.id.home_page)
-                {
-                    //balik ke home
-                }
-                else if(menuItem.getItemId() == R.id.courses_page)
-                {
-                    Intent intent = null;
-                    //intent =new Intent(this, c)    //blm ad courses page anjay
-                    //balik ke page courses
-                }
-                else if(menuItem.getItemId() == R.id.account_page)
-                {
-                    //balik ke page account
-                    //Toast.makeText(HomeActivity.this,"udh berhasil",Toast.LENGTH_SHORT).show();
-                    Intent intent = null;
-                    intent = new Intent(HomeActivity.this, AccountActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                return true;
-            }
-        });
-        hamb_menu.show();
     }
 
     private void fetchAllCourses() {

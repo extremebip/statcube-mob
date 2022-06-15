@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -26,30 +27,36 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountActivity extends ToolBarActivity {
+    Button btnsubscribe,btnchangepass,btnlogout;
+    ImageView subsimg;
+    TextView subsenddate, username, email;
 
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREFERENCE_NAME = "mySharedPreference";
     private static final String KEY_ID = "userId";
 
-    Button btnsubscribe;
-    TextView tbar_title;
     private User user;
-    private Integer userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        Intent intent = getIntent();
+        initializeToolBar("Account",1);
 
-        userId = sharedPreferences.getInt(KEY_ID, -1);
+        int userID = sharedPreferences.getInt(KEY_ID, -1);
+
 
         btnsubscribe =findViewById(R.id.btn_subscribe);
-        tbar_title = findViewById(R.id.toolbar_title);
-        tbar_title.setText("Account");
+        btnchangepass = findViewById(R.id.btn_change_pass);
+        btnlogout = findViewById(R.id.btn_logout);
+        subsimg = findViewById(R.id.iv_subscribed);
+        subsenddate = findViewById(R.id.subs_end_date);
+        username = findViewById(R.id.tv_username);
+        email = findViewById(R.id.tv_email);
 
         btnsubscribe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,9 +65,17 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnchangepass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountActivity.this, ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
-    private void fetchUserById() {
+    private void fetchUserById(Integer userId) {
         RequestQueue rq = Volley.newRequestQueue(AccountActivity.this);
         StringRequest sr = APIHelper.createGetRequest(APIHelper.BASE_URL + "users/" + userId, new Response.Listener<String>() {
             @Override

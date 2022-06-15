@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,19 +23,22 @@ import com.example.statcube.model.Course;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class AllCourseActivity extends AppCompatActivity {
+public class AllCourseActivity extends ToolBarActivity {
 
     private ArrayList<Course> courses = new ArrayList<>();
     CourseAdapter courseAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_course);
+        initializeToolBar("All courses",1);
 
         RecyclerView courseRecycler = findViewById(R.id.rv_courses);
         courseAdapter = new CourseAdapter(this);
