@@ -20,6 +20,13 @@ public class User implements Serializable {
 
     public User(Integer userID) { UserID = userID; }
 
+    public User(Integer userID, String userName, String userEmail, Date userSubscriptionEndDate) {
+        UserID = userID;
+        UserName = userName;
+        UserEmail = userEmail;
+        UserSubscriptionEndDate = userSubscriptionEndDate;
+    }
+
     public Integer getUserID() { return UserID; }
 
     public void setUserID(Integer userID) { UserID = userID; }
@@ -38,5 +45,5 @@ public class User implements Serializable {
 
     public Date getUserSubscriptionEndDate() { return UserSubscriptionEndDate; }
 
-    public void setUserSubscriptionEndDate(Date userSubscriptionEndDate) { UserSubscriptionEndDate = userSubscriptionEndDate; }
+    public void setUserSubscriptionEndDate(String userSubscriptionEndDate) { UserSubscriptionEndDate = userSubscriptionEndDate; }
 }

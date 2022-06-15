@@ -81,8 +81,7 @@ public class AddDiscussionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String discussionTitle = etDiscussionTitle.getText().toString();
                 String discussionContent = etDiscussionContent.getText().toString();
-                Date discussionDate = Calendar.getInstance().getTime();
-                submitDiscussion(new Discussion(0, topicID, userID, discussionDate, discussionTitle, discussionContent));
+                submitDiscussion(new Discussion(0, topicID, userID, discussionTitle, discussionContent));
             }
         });
     }
