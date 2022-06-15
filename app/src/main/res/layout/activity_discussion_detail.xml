@@ -9,73 +9,100 @@
     tools:context=".DiscussionDetailActivity">
     <include layout="@layout/toolbar"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="start"
-        android:paddingVertical="28dp"
-        android:paddingHorizontal="24dp"
-        tools:context=".DiscussionDetailActivity">
-        <TextView
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-127dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="Discussion"/>
-        <TextView
-            android:id="@+id/tv_discussion_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title : "
-            android:textSize="18dp"
-            android:textColor="@color/black" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="start"
+            android:paddingVertical="28dp"
+            android:paddingHorizontal="24dp"
+            tools:context=".DiscussionDetailActivity">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Discussion"/>
+            <TextView
+                android:id="@+id/tv_discussion_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title : "
+                android:textSize="18dp"
+                android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tv_discussion_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Writer : "
-            android:textSize="18dp"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/tv_discussion_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Date : 20 May 2022"
-            android:textSize="18dp"
-            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_discussion_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Writer : "
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_discussion_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date : 20 May 2022"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/tv_discussion_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:padding="16dp"
-            android:layout_marginVertical="12dp"
-            android:textColor="@color/black"
-            android:background="@color/light_grey_blue"/>
+            <TextView
+                android:id="@+id/tv_discussion_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:padding="16dp"
+                android:layout_marginVertical="12dp"
+                android:textColor="@color/black"
+                android:background="@color/light_grey_blue"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="6dp"
-            android:text="Forum"/>
-        <EditText
-            android:id="@+id/et_add_posts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Write forum comment here"
-            />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_posts"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp"
+                android:text="Forum"/>
+            <LinearLayout
+                android:id="@+id/add_post_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+                <EditText
+                    android:id="@+id/et_add_post"
+                    android:inputType="textMultiLine"
+                    android:gravity="top|start"
+                    android:lines="2"
+                    android:maxLines="3"
+                    android:minLines="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Write forum comment here. Min 5 words."
+                    android:layout_weight="80"
+                    />
+                <ImageView
+                    android:id="@+id/btn_submit_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/submit_post" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_posts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
