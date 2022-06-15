@@ -25,6 +25,7 @@
         <activity android:name=".PaymentActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".SubscribeActivity" />
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
