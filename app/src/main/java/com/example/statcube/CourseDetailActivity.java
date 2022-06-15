@@ -32,7 +32,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         author = "Dewi Puspita Tanurezal";
         for(int i = 1; i < 10; i++){
             topics.add(new Topic(i, 1, "Topic Title", "Topic Content - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim aliquam vitae feugiat iaculis elit faucibus eu tellus. Sit nibh consequat sapien ac dignissim tellus. Vestibulum dignissim dui nunc id vitae in. Aliquet semper at nunc cras nunc in. Rutrum convallis nec viverra elit vulputate sagittis.\n" +
-                    "Dictum phasellus facilisi adipiscing sit sed tincidunt. Pulvinar est suspendisse ante nullam mattis urna tincidunt semper. Vitae dignissim tempus interdum risus. Leo maecenas ac arcu tempor, aliquet. Vestibulum amet adipiscing egestas neque. Dolor egestas varius felis, massa id. Nisl nisl erat pellentesque.", "https://www.ilmubahasainggris.com/wp-content/uploads/2017/03/NGC.jpg"));
+                    "Dictum phasellus facilisi adipiscing sit sed tincidunt. Pulvinar est suspendisse ante nullam mattis urna tincidunt semper. Vitae dignissim tempus interdum risus. Leo maecenas ac arcu tempor, aliquet. Vestibulum amet adipiscing egestas neque. Dolor egestas varius felis, massa id. Nisl nisl erat pellentesque.", "https://pbs.twimg.com/profile_images/473572430061920256/L91or_Ck_400x400.png"));
         }
 
         Intent intent = getIntent();

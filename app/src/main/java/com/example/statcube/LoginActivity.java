@@ -49,13 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // kalo session udah ada langsung login
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_NAME, MODE_PRIVATE);
-        userid = sharedPreferences.getInt(KEY_ID, -1);
-        if (userid != -1) {
-            Intent intent = new Intent(new Intent(LoginActivity.this, HomeActivity.class));
-            startActivity(intent);
-        }
 
         btnlogin = findViewById(R.id.btn_login);
 //        btnrediregister = findViewById(R.id.btn_redi_register);
