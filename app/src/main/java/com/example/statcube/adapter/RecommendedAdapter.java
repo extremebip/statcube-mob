@@ -59,9 +59,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ctx, CourseDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("course", courses.get(position));
-                intent.putExtras(bundle);
+                intent.putExtra("CourseID", courses.get(position).getCourseID());
                 ctx.startActivity(intent);
             }
         });
