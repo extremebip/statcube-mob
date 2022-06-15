@@ -48,13 +48,8 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.Vi
         holder.tvDiscussionTitle.setText(discussions.get(position).getDiscussionTitle());
         holder.tvDiscussionUsername.setText(usersName.get(position));
 
-        SimpleDateFormat formatInput = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat formatOutput = new SimpleDateFormat("dd MMM yyyy");
-        Date date = null;
-        try {
-            date = formatInput.parse(discussions.get(position).getDiscussionDate());
-            holder.tvDiscussionDate.setText(formatOutput.format(date));
-        } catch (ParseException e) { e.printStackTrace(); }
+        holder.tvDiscussionDate.setText(formatOutput.format(discussions.get(position).getDiscussionDate()));
 
         holder.cvDiscussion.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,11 +7,11 @@ public class Discussion implements Serializable {
     private Integer discussionID;
     private Integer topicID;
     private Integer userID;
-    private String discussionDate;
+    private Date discussionDate;
     private String discussionTitle;
     private String discussionContent;
 
-    public Discussion(Integer discussionID, Integer topicID, Integer userID, String discussionDate, String discussionTitle, String discussionContent) {
+    public Discussion(Integer discussionID, Integer topicID, Integer userID, Date discussionDate, String discussionTitle, String discussionContent) {
         this.discussionID = discussionID;
         this.topicID = topicID;
         this.userID = userID;
@@ -42,9 +42,9 @@ public class Discussion implements Serializable {
 
     public void setUserID(Integer userID) { this.userID = userID; }
 
-    public String getDiscussionDate() { return discussionDate; }
+    public Date getDiscussionDate() { return discussionDate; }
 
-    public void setDiscussionDate(String discussionDate) { this.discussionDate = discussionDate; }
+    public void setDiscussionDate(Date discussionDate) { this.discussionDate = discussionDate; }
 
     public String getDiscussionTitle() { return discussionTitle; }
 
