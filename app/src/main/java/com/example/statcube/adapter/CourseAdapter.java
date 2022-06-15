@@ -43,7 +43,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(context, CourseDetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("course", courses.get(position));
+                bundle.putInt("CourseID", courses.get(position).getCourseID());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
