@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StatCube">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".SearchActivity"
             android:exported="false" />
         <activity android:name=".AddDiscussionActivity" />
@@ -34,7 +37,7 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".MainActivity" />
     </application>
