@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,12 +38,24 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     Button btnlogin, btnrediregister;
     EditText log_email, log_pass;
-    int userid=-1;
+    int userid = -1;
+
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREFERENCE_NAME = "mySharedPreference";
+    private static final String KEY_ID = "userId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // kalo session udah ada langsung login
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        userid = sharedPreferences.getInt(KEY_ID, -1);
+        if (userid != -1) {
+            Intent intent = new Intent(new Intent(LoginActivity.this, HomeActivity.class));
+            startActivity(intent);
+        }
 
         btnlogin = findViewById(R.id.btn_login);
 //        btnrediregister = findViewById(R.id.btn_redi_register);
@@ -82,8 +95,13 @@ public class LoginActivity extends AppCompatActivity {
                             String UserSubscriptionEndDate = userResult.getString("UserSubscriptionEndDate");
                             // TODO: Parsing Date
                             user = new User(UserID, UserName, UserEmail, null, null);
+                            userid = UserID;
                         } catch (JSONException e) { }
-                        // TODO: Pasangin session user
+                        // session
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt(KEY_ID, userid);
+                        System.out.println("USER ID :" + userid);
+                        editor.apply();
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }
