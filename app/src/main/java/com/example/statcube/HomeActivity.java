@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
     TextView btnViewAll,tbtitle;
     RecyclerView rvRecommended, rvAllCourses;
+    EditText etSearch;
     ImageView back_btn,hamb_menu_btn;
 
     @Override
@@ -45,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         btnViewAll = findViewById(R.id.btn_view_all);
         rvRecommended = findViewById(R.id.rv_recommended);
         rvAllCourses = findViewById(R.id.rv_all_courses);
+        etSearch = findViewById(R.id.et_search);
         tbtitle = findViewById(R.id.toolbar_title);
         back_btn = findViewById(R.id.back_arrow);
         back_btn.setVisibility(View.INVISIBLE);
@@ -56,6 +59,16 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showMenu(view);
+            }
+        });
+
+        etSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String search = etSearch.getText().toString();
+                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                intent.putExtra("search", search);
+                startActivity(intent);
             }
         });
 
