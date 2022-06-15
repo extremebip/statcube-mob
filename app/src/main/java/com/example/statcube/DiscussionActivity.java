@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,15 +16,18 @@ import com.example.statcube.adapter.RecommendedAdapter;
 import com.example.statcube.model.Discussion;
 import com.example.statcube.model.Topic;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 public class DiscussionActivity extends ToolBarActivity {
 
     Button btnadddiscussion;
     DiscussionAdapter discussionAdapter;
-    RecyclerView rvDiscussions;
+    RecyclerView disscusionRecycler;
     Topic topic;
 
     private ArrayList<Discussion> discussions = new ArrayList<>();
@@ -36,8 +40,8 @@ public class DiscussionActivity extends ToolBarActivity {
         initializeToolBar("Discussion",1);
 
         // temp
-        for(int i=0; i<10; i++){
-            discussions.add(new Discussion(1, 1, 1, "2022-06-14T00:00:00.000Z", "Discussion title", "Discussion Content - Discussion Content Discussion Content Discussion ContentDiscussion ContentDiscussion ContentDiscussion Content Discussion Content Discussion Content"));
+        for(int i=1; i<10; i++){
+            discussions.add(new Discussion(i, 1, 1, "2022-06-14T00:00:00.000Z", "Discussion title", "Discussion Content - Discussion Content Discussion Content Discussion ContentDiscussion ContentDiscussion ContentDiscussion Content Discussion Content Discussion Content"));
             usersName.add("Dewi Puspita Tanurezal");
         }
 
@@ -52,10 +56,11 @@ public class DiscussionActivity extends ToolBarActivity {
             }
         });
 
+        disscusionRecycler = findViewById(R.id.rv_discussions);
         discussionAdapter = new DiscussionAdapter(this);
         discussionAdapter.setDiscussions(discussions);
         discussionAdapter.setUsersName(usersName);
-        rvDiscussions.setAdapter(discussionAdapter);
-        rvDiscussions.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        disscusionRecycler.setAdapter(discussionAdapter);
+        disscusionRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     }
 }

@@ -49,7 +49,6 @@ public class AccountActivity extends ToolBarActivity {
 
         int userID = sharedPreferences.getInt(KEY_ID, -1);
 
-
         btnsubscribe =findViewById(R.id.btn_subscribe);
         btnchangepass = findViewById(R.id.btn_change_pass);
         btnlogout = findViewById(R.id.btn_logout);

@@ -1,7 +1,9 @@
 package com.example.statcube.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.statcube.DiscussionDetailActivity;
 import com.example.statcube.R;
 import com.example.statcube.model.Discussion;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.ViewHolder> {
 
@@ -39,13 +47,21 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.Vi
     public void onBindViewHolder(@NonNull DiscussionAdapter.ViewHolder holder, int position) {
         holder.tvDiscussionTitle.setText(discussions.get(position).getDiscussionTitle());
         holder.tvDiscussionUsername.setText(usersName.get(position));
-        // LocalDateTime dateTime = LocalDateTime.parse(discussions.get(position).getDiscussionDate().toString());
-        holder.tvDiscussionDate.setText(discussions.get(position).getDiscussionDate().toString());
+
+        SimpleDateFormat formatInput = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat formatOutput = new SimpleDateFormat("dd MMM yyyy");
+        Date date = null;
+        try {
+            date = formatInput.parse(discussions.get(position).getDiscussionDate());
+            holder.tvDiscussionDate.setText(formatOutput.format(date));
+        } catch (ParseException e) { e.printStackTrace(); }
 
         holder.cvDiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, DiscussionDetailActivity.class);
+                intent.putExtra("DiscussionID", discussions.get(position).getDiscussionID());
+                context.startActivity(intent);
             }
         });
 

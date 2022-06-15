@@ -45,5 +45,5 @@ public class User implements Serializable {
 
     public Date getUserSubscriptionEndDate() { return UserSubscriptionEndDate; }
 
-    public void setUserSubscriptionEndDate(String userSubscriptionEndDate) { UserSubscriptionEndDate = userSubscriptionEndDate; }
+    public void setUserSubscriptionEndDate(Date userSubscriptionEndDate) { UserSubscriptionEndDate = userSubscriptionEndDate; }
 }
