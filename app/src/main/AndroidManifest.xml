@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StatCube">
-        <activity android:name=".HomeActivity"></activity>
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
         <activity android:name=".AddDiscussionActivity" />
         <activity android:name=".DiscussionDetailActivity" />
         <activity android:name=".DiscussionActivity" />
@@ -23,16 +25,16 @@
         <activity android:name=".PaymentActivity" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubscribeActivity"
-            android:exported="true">
-        </activity>
+            android:name=".HomeActivity"
+            android:exported="true"></activity>
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".MainActivity" />
     </application>

@@ -19,6 +19,20 @@
     android:orientation="vertical"
     android:layout_margin="24dp"
     tools:context=".HomeActivity">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search"
+        android:textColorHint="@color/black"
+        android:background="@drawable/cornerstyle"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="18dp"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="16dp"
+        android:backgroundTint="@color/grey_blue" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
