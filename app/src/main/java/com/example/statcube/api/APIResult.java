@@ -40,7 +40,7 @@ public class APIResult {
             HasResult = result.has("result");
             if (HasResult) {
                 Object tempResult = result.get("result");
-                if (tempMessage instanceof JSONArray) {
+                if (tempResult instanceof JSONArray) {
                     ResultType = "array";
                     ArrayResult = (JSONArray) tempResult;
                 } else {
