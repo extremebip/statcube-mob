@@ -17,6 +17,7 @@ public class SubscribeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribe);
+        Intent intent = getIntent();
 
         subsbtn =findViewById(R.id.subsbutton);
         tbar_title = findViewById(R.id.toolbar_title);
