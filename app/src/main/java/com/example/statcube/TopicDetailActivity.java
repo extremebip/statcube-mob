@@ -43,7 +43,11 @@ public class TopicDetailActivity extends AppCompatActivity {
         llDiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(TopicDetailActivity.this, DiscussionActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("topic", topic);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

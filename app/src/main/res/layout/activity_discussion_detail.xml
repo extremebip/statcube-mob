@@ -40,7 +40,7 @@
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/tv_discussion_date"
+        android:id="@+id/tv_discussion_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="17dp"
