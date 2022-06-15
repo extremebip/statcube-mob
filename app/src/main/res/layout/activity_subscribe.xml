@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,9 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PaymentActivity">
+    tools:context=".SubscribeActivity"
+    >
     <include layout="@layout/toolbar"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,18 +25,33 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Payment Confirmation"
-            android:layout_marginBottom="20dp"
+            android:gravity="start"
+            android:text="Benefits"
+            android:layout_marginBottom="5dp"
             android:textStyle="bold"
             android:textSize="20sp"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Free access to all courses"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Connect with other users via forum discussion"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/payment_price"
             android:text="IDR 500.000"
-            android:gravity="center"
+            android:gravity="start"
             android:textStyle="bold"
             android:textSize="20sp"
             />
@@ -48,33 +61,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/payment_month"
             android:text="1 month"
-            android:gravity="center"
+            android:gravity="start"
             android:textSize="15sp"
             />
-
     </LinearLayout>
-
-    <Spinner
-        android:id="@+id/spinner_payments"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:spinnerMode="dropdown"
-        android:layout_margin="30dp"
-        android:layout_gravity="center"
-        android:background="@drawable/cornerstyle"
-        android:backgroundTint="@color/light_grey"
-        android:paddingLeft="20dp"
-        android:paddingVertical="4dp"
-        />
-
     <Button
-        android:id="@+id/paymentbtn"
         android:layout_marginTop="50dp"
-        android:layout_width="200dp"
+        android:id="@+id/subsbutton"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button"
         android:backgroundTint="@color/red"
-        android:text="Confirm"
+        android:text="Continue to Payment"
         android:layout_gravity="center"
         android:gravity="center"
         android:theme="@style/redbutton"/>

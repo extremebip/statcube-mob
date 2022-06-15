@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StatCube">
+        <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".AddDiscussionActivity" />
         <activity android:name=".DiscussionDetailActivity" />
