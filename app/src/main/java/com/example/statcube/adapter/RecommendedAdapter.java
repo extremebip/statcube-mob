@@ -1,7 +1,9 @@
 package com.example.statcube.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.statcube.CourseDetailActivity;
 import com.example.statcube.R;
+import com.example.statcube.model.Course;
 
 import java.util.ArrayList;
 
 public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.ViewHolder> {
 
     private Context ctx;
-    private ArrayList<String> titles;
+    private ArrayList<Course> courses;
     private ArrayList<String> authors;
 
-    public RecommendedAdapter(Context ctx, ArrayList<String> titles, ArrayList<String> authors) {
+    public RecommendedAdapter(Context ctx, ArrayList<Course> courses, ArrayList<String> authors) {
         this.ctx = ctx;
-        this.titles = titles;
+        this.courses = courses;
         this.authors = authors;
     }
 
@@ -36,7 +40,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecommendedAdapter.ViewHolder holder, int position) {
-        holder.tvTitle.setText(titles.get(position));
+        holder.tvTitle.setText(courses.get(position).getCourseTitle());
         holder.tvAuthor.setText(authors.get(position));
 
         if(position%3 == 0) holder.cvRecommended.setCardBackgroundColor(Color.parseColor("#27647B"));
@@ -46,15 +50,18 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         holder.cvRecommended.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // kalo card view diklik
-
+                Intent intent = new Intent(ctx, CourseDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("course", courses.get(position));
+                intent.putExtras(bundle);
+                ctx.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return titles.size();
+        return courses.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        RecommendedAdapter recommendedAdapter = new RecommendedAdapter(this, titlesRecommended, authorsRecommended);
+        RecommendedAdapter recommendedAdapter = new RecommendedAdapter(this, courses, authorsRecommended);
         rvRecommended.setAdapter(recommendedAdapter);
         rvRecommended.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
