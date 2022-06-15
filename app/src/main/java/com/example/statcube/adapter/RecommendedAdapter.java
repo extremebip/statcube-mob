@@ -31,6 +31,14 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         this.authors = authors;
     }
 
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
+    public void setAuthors(ArrayList<String> authors) {
+        this.authors = authors;
+    }
+
     @NonNull
     @Override
     public RecommendedAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

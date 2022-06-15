@@ -28,6 +28,8 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
         this.courses = courses;
     }
 
+    public void setCourses(ArrayList<Course> courses) { this.courses = courses; }
+
     @NonNull
     @Override
     public AllCoursesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
