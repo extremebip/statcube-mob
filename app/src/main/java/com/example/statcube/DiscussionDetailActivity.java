@@ -184,6 +184,7 @@ public class DiscussionDetailActivity extends ToolBarActivity {
                     );
                     posts.add(post);
                     postAdapter.notifyDataSetChanged();
+                    tvNoComment.setText("");
                 } catch (Exception e) {
 
                 }
