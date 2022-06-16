@@ -2,7 +2,9 @@ package com.example.statcube;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,12 +14,40 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.statcube.api.APIHelper;
+import com.example.statcube.api.APIResult;
+import com.example.statcube.model.Course;
+import com.example.statcube.model.User;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaymentActivity extends ToolBarActivity {
-    TextView tbar_title;
+
     Button paybtn;
+
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREFERENCE_NAME = "mySharedPreference";
+    private static final String KEY_ID = "userId";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +57,6 @@ public class PaymentActivity extends ToolBarActivity {
         Intent intent = getIntent();
 
         paybtn =findViewById(R.id.paymentbtn);
-        tbar_title = findViewById(R.id.toolbar_title);
-        tbar_title.setText("Payment");
 
 
         Spinner spinnerPayment =findViewById(R.id.spinner_payments);
@@ -39,62 +67,46 @@ public class PaymentActivity extends ToolBarActivity {
 
         int idx = spinnerPayment.getSelectedItemPosition();
 
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        int userID = sharedPreferences.getInt(KEY_ID, -1);
 
         paybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int idx = spinnerPayment.getSelectedItemPosition();
+                String paymethod = "";
+                if(idx == 1) paymethod = "BCA";
+                else if(idx == 2) paymethod = "BNI";
+                else if(idx == 3) paymethod = "MANDIRI";
+                else if(idx == 4) paymethod = "CIMB NIAGA";
+                else if(idx == 5) paymethod = "DBS";
+
                 if(idx == 0){
                     Toast.makeText(PaymentActivity.this, "Please choose payment method", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Calendar calender = Calendar.getInstance();
-                    String currentdate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calender.getTime());
-                    Log.i("test", currentdate);
+                    Map<String, String> body = new HashMap<String, String>();
+                    body.put("UserID", String.valueOf(userID));
+                    body.put("PaymentMethod", paymethod);
 
-                    String[] splitDate = currentdate.split("/");
-                    String monthstr = "";
-                    int date = Integer.parseInt(splitDate[1]);
-                    int month = Integer.parseInt(splitDate[0]);
-                    String year = (splitDate[2]);
-                    year = "20"+year;
-                    Log.i("date",String.valueOf(date));
-                    Log.i("month",String.valueOf(month));
-                    Log.i("year",(year));
+                    Log.i("pay", String.valueOf(userID));
 
-                    if(month == 1){
-                        monthstr = "January";
-                    }else if(month == 2){
-                        monthstr = "February";
-                    }else if(month == 3){
-                        monthstr = "March";
-                    }else if(month == 4){
-                        monthstr = "April";
-                    }else if(month == 5){
-                        monthstr = "May";
-                    }else if(month == 6){
-                        monthstr = "June";
-                    }else if(month == 7){
-                        monthstr = "July";
-                    }else if(month == 8){
-                        monthstr = "August";
-                    }else if(month == 9){
-                        monthstr = "September";
-                    }else if(month == 10){
-                        monthstr = "October";
-                    }else if(month == 11){
-                        monthstr = "November";
-                    }else if(month == 12){
-                        monthstr = "December";
-                    }
+                    RequestQueue rq = Volley.newRequestQueue(PaymentActivity.this);
+                    StringRequest sr = APIHelper.createPostRequest(APIHelper.BASE_URL + "users/subscribe", body, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Intent intent = new Intent(PaymentActivity.this, AccountActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            
+                        }
+                    });
 
-                    Log.i("bulan",monthstr);
-                    String subdate = String.valueOf(date) + " " + monthstr + " " +year;
-                    Log.i("subdate", subdate);
-
-
-                    Intent intent = new Intent(PaymentActivity.this, AccountActivity.class);
-                    startActivity(intent);
+                    rq.add(sr);
                 }
             }
         });
