@@ -53,12 +53,17 @@
             />
         <EditText
             android:id="@+id/et_discussion_content"
+            android:inputType="textMultiLine"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
+            android:lines="12"
+            android:minLines="12"
+            android:maxLines="12"
             android:hint="Write post content here"
             android:textColorHint="@color/black"
             android:textSize="19dp"
             android:layout_marginBottom="10dp"
+            android:gravity="top|left"
             android:background="@color/light_grey"
             android:padding="5dp"
             />

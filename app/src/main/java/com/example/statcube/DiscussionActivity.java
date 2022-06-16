@@ -61,8 +61,10 @@ public class DiscussionActivity extends ToolBarActivity {
         btnadddiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = null;
-                intent = new Intent(DiscussionActivity.this, AddDiscussionActivity.class);
+                Intent intent = new Intent(DiscussionActivity.this, AddDiscussionActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Topic", topic);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

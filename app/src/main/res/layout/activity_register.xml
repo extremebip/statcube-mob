@@ -23,6 +23,8 @@
         android:textColor="@color/black" />
     <EditText
         android:id="@+id/register_username"
+        android:inputType="text"
+        android:maxLines="1"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:hint="Username"
@@ -35,6 +37,8 @@
         />
     <EditText
         android:id="@+id/register_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -53,6 +57,7 @@
         android:layout_marginBottom="16dp"
         android:textColorHint="@color/black"
         android:inputType="textPassword"
+        android:maxLines="1"
         android:background="@drawable/cornerstyle"
         android:backgroundTint="@color/grey_blue"
         android:paddingHorizontal="20dp"
@@ -67,6 +72,7 @@
         android:layout_marginBottom="28dp"
         android:textColorHint="@color/black"
         android:inputType="textPassword"
+        android:maxLines="1"
         android:background="@drawable/cornerstyle"
         android:backgroundTint="@color/grey_blue"
         android:paddingHorizontal="20dp"
