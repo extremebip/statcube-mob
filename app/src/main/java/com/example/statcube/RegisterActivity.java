@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText etUsername, etEmail, etPassword, etConfirmPassword;
     Button btnRegister;
+    ImageView back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,14 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.register_password);
         etConfirmPassword = findViewById(R.id.confirm_password);
         btnRegister = findViewById(R.id.btn_register);
+        back_btn = findViewById(R.id.back_arrow);
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
