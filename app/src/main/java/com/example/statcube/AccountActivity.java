@@ -159,7 +159,7 @@ public class AccountActivity extends ToolBarActivity {
                             UserSubscribeEndDate = day + " " + month + " " + year ;
 
                             subsenddate.setText(UserSubscribeEndDate);
-                            btnsubscribe.setVisibility(View.INVISIBLE);
+                            btnsubscribe.setVisibility(View.GONE);
                         }
 
                         //user = new User(UserID, UserName, UserEmail, SubscriptionEndDate);
