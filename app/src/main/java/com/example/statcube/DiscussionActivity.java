@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,6 +46,8 @@ public class DiscussionActivity extends ToolBarActivity {
     private ArrayList<Discussion> discussions = new ArrayList<>();
     private ArrayList<String> usersName = new ArrayList<>();
 
+    TextView tvNoDiscussion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,7 @@ public class DiscussionActivity extends ToolBarActivity {
         fetchDiscussionByTopic(topic.getTopicID());
 
         btnadddiscussion = findViewById(R.id.btn_add_discussion);
+        tvNoDiscussion = findViewById(R.id.tv_no_discussion);
 
         btnadddiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,10 +77,10 @@ public class DiscussionActivity extends ToolBarActivity {
         discussionAdapter.setUsersName(usersName);
         disscusionRecycler.setAdapter(discussionAdapter);
         disscusionRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+
     }
 
     private void fetchDiscussionByTopic(int topicId) {
-        System.out.println("CHECKPOINT");
         RequestQueue rq = Volley.newRequestQueue(DiscussionActivity.this);
         StringRequest sr = APIHelper.createGetRequest(APIHelper.BASE_URL + "topics/" + topicId + "/discussions", new Response.Listener<String>() {
             @Override
@@ -98,11 +102,15 @@ public class DiscussionActivity extends ToolBarActivity {
                         Discussion discussion = new Discussion(discussionID, topicID, userID, parser.parse(discussionDate), discussionTitle, discussionContent);
                         discussions.add(discussion);
                         usersName.add(discussionAuthor);
-                        System.out.println("CHECKPOINTS");
                     }
                     discussionAdapter.setDiscussions(discussions);
                     discussionAdapter.setUsersName(usersName);
                     discussionAdapter.notifyDataSetChanged();
+
+                    if(discussions.size() == 0){
+                        tvNoDiscussion.setText("There are no discussion yet");
+                    }
+
                 } catch (Exception e) { }
             }
         }, new Response.ErrorListener() {

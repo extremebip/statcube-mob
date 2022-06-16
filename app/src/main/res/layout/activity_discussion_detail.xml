@@ -33,25 +33,20 @@
                 android:id="@+id/tv_discussion_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title : "
                 android:textSize="18dp"
                 android:textColor="@color/black" />
-
             <TextView
                 android:id="@+id/tv_discussion_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Writer : "
                 android:textSize="18dp"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_discussion_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date : 20 May 2022"
                 android:textSize="18dp"
                 android:textColor="@color/black"/>
-
             <TextView
                 android:id="@+id/tv_discussion_content"
                 android:layout_width="match_parent"
@@ -61,16 +56,21 @@
                 android:layout_marginVertical="12dp"
                 android:textColor="@color/black"
                 android:background="@color/light_grey_blue"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24dp"
+                android:textSize="20dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="4dp"
                 android:text="Forum"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_green_blue" />
+
             <LinearLayout
                 android:id="@+id/add_post_wrapper"
                 android:layout_width="match_parent"
@@ -82,14 +82,16 @@
                     android:id="@+id/et_add_post"
                     android:inputType="textMultiLine"
                     android:gravity="top|start"
-                    android:lines="2"
                     android:maxLines="3"
-                    android:minLines="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/light_grey"
                     android:hint="Write forum comment here. Min 5 words."
-                    android:layout_weight="80"
-                    />
+                    android:textSize="16dp"
+                    android:padding="5dp"
+                    android:layout_marginVertical="8dp"
+                    android:layout_weight="80" />
                 <ImageView
                     android:id="@+id/btn_submit_post"
                     android:layout_width="wrap_content"
@@ -103,6 +105,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
+            <TextView
+                android:id="@+id/tv_no_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textSize="16dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

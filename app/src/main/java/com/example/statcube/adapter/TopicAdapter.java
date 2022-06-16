@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.statcube.CourseDetailActivity;
 import com.example.statcube.R;
+import com.example.statcube.SubscribeActivity;
 import com.example.statcube.TopicDetailActivity;
 import com.example.statcube.model.Topic;
+import com.example.statcube.model.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,10 +27,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     private Context context;
     private ArrayList<Topic> topics;
+    private User user = null;
 
     public TopicAdapter(Context context) { this.context = context; }
 
     public void setTopics(ArrayList<Topic> topics) { this.topics = topics; }
+
+    public void setUser(User user) { this.user = user; }
 
     @NonNull
     @Override
@@ -45,11 +50,17 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.cvTopic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, TopicDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("topic", topics.get(position));
-                intent.putExtras(bundle);
-                context.startActivity(intent);
+                if (user == null){
+                    Intent intent = new Intent(context, SubscribeActivity.class);
+                    context.startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(context, TopicDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("topic", topics.get(position));
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
             }
         });
     }

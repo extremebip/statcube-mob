@@ -40,7 +40,7 @@ import java.util.Map;
 
 public class DiscussionDetailActivity extends ToolBarActivity {
 
-    TextView tvDiscussionTitle, tvDiscussionUsername, tvDiscussionDate, tvDiscussionContent;
+    TextView tvDiscussionTitle, tvDiscussionUsername, tvDiscussionDate, tvDiscussionContent, tvNoComment;
     EditText etAddPost;
     LinearLayout addPostWrapper;
 
@@ -66,6 +66,7 @@ public class DiscussionDetailActivity extends ToolBarActivity {
         tvDiscussionUsername = findViewById(R.id.tv_discussion_username);
         tvDiscussionDate = findViewById(R.id.tv_discussion_date);
         tvDiscussionContent = findViewById(R.id.tv_discussion_content);
+        tvNoComment = findViewById(R.id.tv_no_comment);
         etAddPost = findViewById(R.id.et_add_post);
         addPostWrapper = findViewById(R.id.add_post_wrapper);
 
@@ -100,9 +101,9 @@ public class DiscussionDetailActivity extends ToolBarActivity {
 
                     Date discussionDate = parser.parse(discussionDateString);
 
-                    tvDiscussionTitle.setText("Title: " + discussionTitle);
-                    tvDiscussionUsername.setText("Writer: " + discussionAuthor);
-                    tvDiscussionDate.setText("Date: " + formatter.format(discussionDate));
+                    tvDiscussionTitle.setText("Title : " + discussionTitle);
+                    tvDiscussionUsername.setText("Writer : " + discussionAuthor);
+                    tvDiscussionDate.setText("Date : " + formatter.format(discussionDate));
                     tvDiscussionContent.setText(discussionContent);
 
                     JSONArray postsArr = discussionObj.getJSONArray("Posts");
@@ -123,6 +124,9 @@ public class DiscussionDetailActivity extends ToolBarActivity {
                     }
                     postAdapter.setPosts(posts);
                     postAdapter.notifyDataSetChanged();
+                    if(posts.size() == 0){
+                        tvNoComment.setText("There are no comment yet");
+                    }
                 } catch (JSONException e) {
                     Log.e("Error", "Parsing JSON Error");
                 } catch (Exception e) {

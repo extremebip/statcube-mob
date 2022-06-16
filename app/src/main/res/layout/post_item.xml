@@ -10,29 +10,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_post_username"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="16dp"
-            android:text="Username"/>
-        <TextView
-            android:id="@+id/tv_post_date"
+            android:paddingHorizontal="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_post_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:text="Username"/>
+            <TextView
+                android:id="@+id/tv_post_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:text="Date"/>
+            <TextView
+                android:id="@+id/tv_post_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:text="Content"/>
+        </LinearLayout>
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="14dp"
-            android:text="Date"/>
-        <TextView
-            android:id="@+id/tv_post_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="14dp"
-            android:text="Content"/>
+            android:layout_height="1dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/dark_green_blue" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
