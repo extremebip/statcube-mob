@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             APIResult result = new APIResult(new JSONObject(response));
                             JSONObject userResult = (JSONObject) result.getResult();
+
                             int UserID = userResult.getInt("UserID");
                             String UserName = userResult.getString("UserName");
                             String UserEmail = userResult.getString("UserEmail");

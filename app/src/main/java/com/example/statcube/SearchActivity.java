@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class SearchActivity extends ToolBarActivity{
 
-    private ArrayList<Course> courses;
+    private ArrayList<Course> courses = new ArrayList<>();
     SearchView svSearch;
 
     RecyclerView courseRecycler;
@@ -38,6 +38,8 @@ public class SearchActivity extends ToolBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         initializeToolBar("Search",1);
+
+        fetchAllCourses();
 
         svSearch = findViewById(R.id.sv_search);
         svSearch.clearFocus();
@@ -56,12 +58,12 @@ public class SearchActivity extends ToolBarActivity{
         courseRecycler = findViewById(R.id.rv_search_result);
         courseRecycler.setHasFixedSize(true);
         courseRecycler.setLayoutManager(new LinearLayoutManager(this));
-        courses = new ArrayList<>();
 
-        fetchAllCourses();
         courseAdapter = new CourseAdapter(this);
         courseAdapter.setCourses(courses);
         courseRecycler.setAdapter(courseAdapter);
+
+        System.out.println("TOTAL COURSE ----:" + courses.size());
     }
 
     private void filterList(String text) {
@@ -71,10 +73,12 @@ public class SearchActivity extends ToolBarActivity{
             Course course = courses.get(i);
             if(course.getCourseTitle().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(course);
+                System.out.println(course.getCourseID() + course.getCourseTitle() + course.getCourseDescription());
             }
         }
         if(filteredList.isEmpty()){
             Toast.makeText(this, "No course found", Toast.LENGTH_SHORT).show();
+            System.out.println("TOTAL COURSE :" + courses.size());
         }
         else{
             courseAdapter.setCourses(filteredList);
