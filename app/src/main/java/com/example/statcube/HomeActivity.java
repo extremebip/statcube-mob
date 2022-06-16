@@ -64,6 +64,9 @@ public class HomeActivity extends ToolBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("courses", courses);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -83,7 +86,6 @@ public class HomeActivity extends ToolBarActivity {
         allCoursesAdapter = new AllCoursesAdapter(this, courses);
         rvAllCourses.setAdapter(allCoursesAdapter);
         rvAllCourses.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-
 
     }
 
@@ -107,6 +109,7 @@ public class HomeActivity extends ToolBarActivity {
                     }
                     allCoursesAdapter.setCourses(courses);
                     allCoursesAdapter.notifyDataSetChanged();
+
                 } catch (JSONException e) {
                     Log.e("Error", "Parsing JSON Error");
                 }
@@ -149,4 +152,6 @@ public class HomeActivity extends ToolBarActivity {
         });
         rq.add(sr);
     }
+
+
 }

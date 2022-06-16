@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -62,8 +63,6 @@ public class SearchActivity extends ToolBarActivity{
         courseAdapter = new CourseAdapter(this);
         courseAdapter.setCourses(courses);
         courseRecycler.setAdapter(courseAdapter);
-
-        System.out.println("TOTAL COURSE ----:" + courses.size());
     }
 
     private void filterList(String text) {
@@ -78,7 +77,6 @@ public class SearchActivity extends ToolBarActivity{
         }
         if(filteredList.isEmpty()){
             Toast.makeText(this, "No course found", Toast.LENGTH_SHORT).show();
-            System.out.println("TOTAL COURSE :" + courses.size());
         }
         else{
             courseAdapter.setCourses(filteredList);
@@ -94,7 +92,6 @@ public class SearchActivity extends ToolBarActivity{
                 try {
                     APIResult result = new APIResult(new JSONObject(response));
                     JSONArray coursesArr = (JSONArray) result.getResult();
-                    ArrayList<Course> courses = new ArrayList<>();
                     for (int i = 0; i < coursesArr.length(); i++) {
                         JSONObject courseObj = coursesArr.getJSONObject(i);
                         int CourseID = courseObj.getInt("CourseID");
