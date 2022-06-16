@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -85,8 +86,13 @@ public class AccountActivity extends ToolBarActivity {
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(AccountActivity.this, ChangePasswordActivity.class);
-//                startActivity(intent);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+                finish();
+                Toast.makeText(AccountActivity.this, "Logout Success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AccountActivity.this, WelcomeActivity.class);
+                startActivity(intent);
             }
         });
     }
