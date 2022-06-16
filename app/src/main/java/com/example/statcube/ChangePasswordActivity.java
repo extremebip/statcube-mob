@@ -62,7 +62,11 @@ public class ChangePasswordActivity extends ToolBarActivity {
                 validate = validateConfirm(confirm_pass) && validate;
 
                 if (validate) {
-                    validateOld(old_pass);
+                        validateOld(old_pass);
+                        Toast toast = Toast.makeText(ChangePasswordActivity.this, "Change Password Success\n", Toast.LENGTH_LONG);
+                        toast.show();
+                        Intent intent = new Intent(ChangePasswordActivity.this, AccountActivity.class);
+                        startActivity(intent);
                 }
             }
         });
