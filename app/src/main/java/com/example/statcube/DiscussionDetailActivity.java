@@ -177,11 +177,10 @@ public class DiscussionDetailActivity extends ToolBarActivity {
                     String author = postObj.getString("PostAuthor");
                     String content = postObj.getString("PostContent");
                     String postDateString = postObj.getString("PostDate");
-                    boolean isDeleted = postObj.getBoolean("PostDeleted");
 
                     SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                     Post post = new Post(
-                            PostID, DiscussionID, UserID, author, content, parser.parse(postDateString), isDeleted
+                            PostID, DiscussionID, UserID, author, content, parser.parse(postDateString), false
                     );
                     posts.add(post);
                     postAdapter.notifyDataSetChanged();
