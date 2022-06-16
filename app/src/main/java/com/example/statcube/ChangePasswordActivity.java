@@ -62,11 +62,7 @@ public class ChangePasswordActivity extends ToolBarActivity {
                 validate = validateConfirm(confirm_pass) && validate;
 
                 if (validate) {
-                        validateOld(old_pass);
-                        Toast toast = Toast.makeText(ChangePasswordActivity.this, "Change Password Success\n", Toast.LENGTH_LONG);
-                        toast.show();
-                        Intent intent = new Intent(ChangePasswordActivity.this, AccountActivity.class);
-                        startActivity(intent);
+                    validateOld(old_pass);
                 }
             }
         });
@@ -87,12 +83,11 @@ public class ChangePasswordActivity extends ToolBarActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    APIResult result = new APIResult(new JSONObject(response));
-                    JSONObject userResult = (JSONObject) result.getResult();
-                    int userId = userResult.getInt("UserID");
-                    String userPassword = userResult.getString("UserPassword");
-
-                } catch (JSONException e) {
+                    Toast toast = Toast.makeText(ChangePasswordActivity.this, "Change Password Success", Toast.LENGTH_LONG);
+                    toast.show();
+                    Intent intent = new Intent(ChangePasswordActivity.this, AccountActivity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
