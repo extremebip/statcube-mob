@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class CourseDetailActivity extends AppCompatActivity {
+public class CourseDetailActivity extends ToolBarActivity {
 
     TopicAdapter topicAdapter;
     int CourseID;
@@ -45,6 +45,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
+        initializeToolBar("Course",1);
 
         Intent intent = getIntent();
         CourseID = intent.getIntExtra("CourseID", 0);

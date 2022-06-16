@@ -24,7 +24,6 @@ public class ToolBarActivity extends AppCompatActivity {
     {
         tbtitle = findViewById(R.id.toolbar_title);
         back_btn = findViewById(R.id.back_arrow);
-        back_btn.setVisibility(View.INVISIBLE);
         hamb_menu_btn = findViewById(R.id.hamb_menu);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override

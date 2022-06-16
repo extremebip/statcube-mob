@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnlogin;
     EditText log_email, log_pass;
     int userid = -1;
+    ImageView back_btn;
 
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREFERENCE_NAME = "mySharedPreference";
@@ -57,6 +59,14 @@ public class LoginActivity extends AppCompatActivity {
         btnlogin = findViewById(R.id.btn_login);
         log_email = findViewById(R.id.login_email);
         log_pass = findViewById(R.id.login_password);
+        back_btn = findViewById(R.id.back_arrow);
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
