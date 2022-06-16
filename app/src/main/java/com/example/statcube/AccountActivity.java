@@ -61,9 +61,6 @@ public class AccountActivity extends ToolBarActivity {
         subsstatus = findViewById(R.id.tv_subscribed);
 
         fetchUserById(userID);
-
-        String subscribed = subsenddate.toString();
-
         btnsubscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,10 +69,6 @@ public class AccountActivity extends ToolBarActivity {
             }
         });
 
-        if(!subscribed.equals("null"))
-        {
-            btnsubscribe.setVisibility(View.INVISIBLE);
-        }
         btnchangepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,47 +116,54 @@ public class AccountActivity extends ToolBarActivity {
                             UserSubscribeEndDate="-";
                             subsimg.setImageResource(R.drawable.unsubscribed);
                             subsstatus.setText("Haven't subscribed");
+                            subsenddate.setText(UserSubscribeEndDate);
                         }
-                        String day="";String month="";String year="";
-                        for(int i=0;i<UserSubscribeEndDate.length();i++)
+                        else
                         {
-                            if(i==0)
+                            String day="";String month="";String year="";
+                            for(int i=0;i<UserSubscribeEndDate.length();i++)
                             {
-                                String c = Character.toString(UserSubscribeEndDate.charAt(i));
-                                String c2 = Character.toString(UserSubscribeEndDate.charAt(i+1));
-                                String c3 = Character.toString(UserSubscribeEndDate.charAt(i+2));
-                                String c4 = Character.toString(UserSubscribeEndDate.charAt(i+3));
-                                year = c+c2+c3+c4;
+                                if(i==0)
+                                {
+                                    String c = Character.toString(UserSubscribeEndDate.charAt(i));
+                                    String c2 = Character.toString(UserSubscribeEndDate.charAt(i+1));
+                                    String c3 = Character.toString(UserSubscribeEndDate.charAt(i+2));
+                                    String c4 = Character.toString(UserSubscribeEndDate.charAt(i+3));
+                                    year = c+c2+c3+c4;
+                                }
+                                if(i==5)
+                                {
+                                    String c = Character.toString(UserSubscribeEndDate.charAt(i));
+                                    String c2 = Character.toString(UserSubscribeEndDate.charAt(i+1));
+                                    month = c+c2;
+                                }
+                                if(i==7)
+                                {
+                                    String c = Character.toString(UserSubscribeEndDate.charAt(i));
+                                    String c2 = Character.toString(UserSubscribeEndDate.charAt(i+1));
+                                    day = c+c2;
+                                }
                             }
-                            if(i==5)
-                            {
-                                String c = Character.toString(UserSubscribeEndDate.charAt(i));
-                                String c2 = Character.toString(UserSubscribeEndDate.charAt(i+1));
-                                month = c+c2;
-                            }
-                            if(i==7)
-                            {
-                                String c = Character.toString(UserSubscribeEndDate.charAt(i));
-                                String c2 = Character.toString(UserSubscribeEndDate.charAt(i+1));
-                                day = c+c2;
-                            }
-                        }
-                        if(month.equals("1-")){ month = "January";}
-                        else if(month.equals("2-")){ month = "February";}
-                        else if(month.equals("3-")){ month = "March";}
-                        else if(month.equals("4-")){ month = "April";}
-                        else if(month.equals("5-")){ month = "May";}
-                        else if(month.equals("6-")){ month = "June";}
-                        else if(month.equals("7-")){ month = "July";}
-                        else if(month.equals("8-")){ month = "August";}
-                        else if(month.equals("9-")){ month = "September";}
-                        else if(month.equals("10")){ month = "October";}
-                        else if(month.equals("11")){ month = "November";}
-                        else if(month.equals("12")){ month = "December";}
-                        UserSubscribeEndDate = day + " " + month + " " + year ;
+                            if(month.equals("1-")){ month = "January";}
+                            else if(month.equals("2-")){ month = "February";}
+                            else if(month.equals("3-")){ month = "March";}
+                            else if(month.equals("4-")){ month = "April";}
+                            else if(month.equals("5-")){ month = "May";}
+                            else if(month.equals("6-")){ month = "June";}
+                            else if(month.equals("7-")){ month = "July";}
+                            else if(month.equals("8-")){ month = "August";}
+                            else if(month.equals("9-")){ month = "September";}
+                            else if(month.equals("10")){ month = "October";}
+                            else if(month.equals("11")){ month = "November";}
+                            else if(month.equals("12")){ month = "December";}
+                            UserSubscribeEndDate = day + " " + month + " " + year ;
 
-                        subsenddate.setText(UserSubscribeEndDate);
+                            subsenddate.setText(UserSubscribeEndDate);
+                            btnsubscribe.setVisibility(View.INVISIBLE);
+                        }
+
                         //user = new User(UserID, UserName, UserEmail, SubscriptionEndDate);
+
 
                 } catch (JSONException e) {
                     Log.e("Error", "Parsing JSON Error");
