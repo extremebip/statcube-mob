@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.statcube.api.APIHelper;
 import com.example.statcube.api.APIResult;
 import com.example.statcube.model.Discussion;
+import com.example.statcube.model.Topic;
 import com.example.statcube.model.User;
 import com.example.statcube.model.validation.UsernameRule;
 
@@ -39,87 +41,42 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddDiscussionActivity extends AppCompatActivity {
+public class AddDiscussionActivity extends ToolBarActivity {
 
-    ImageView back_btn,hamb_menu_btn,postbtn;
-    TextView tbtitle;
+    Button postbtn;
     EditText etDiscussionTitle, etDiscussionContent;
 
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREFERENCE_NAME = "mySharedPreference";
     private static final String KEY_ID = "userId";
+    Topic topic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_discussion);
+        initializeToolBar("Discussion", 1);
 
         Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        int topicID = b.getInt("TopicID");
+        topic = (Topic) intent.getSerializableExtra("Topic");
 
-        tbtitle = findViewById(R.id.toolbar_title);
-        back_btn = findViewById(R.id.back_arrow);
-        hamb_menu_btn = findViewById(R.id.hamb_menu);
         etDiscussionTitle =  findViewById(R.id.et_discussion_title);
         etDiscussionContent = findViewById(R.id.et_discussion_content);
-
-        tbtitle.setText("Discussion");
+        postbtn = findViewById(R.id.btn_post);
 
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_NAME, MODE_PRIVATE);
         int userID = sharedPreferences.getInt(KEY_ID, -1);
-
-        hamb_menu_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showMenu(view);
-            }
-        });
 
         postbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String discussionTitle = etDiscussionTitle.getText().toString();
                 String discussionContent = etDiscussionContent.getText().toString();
-                submitDiscussion(new Discussion(0, topicID, userID, discussionTitle, discussionContent));
+                submitDiscussion(new Discussion(0, topic.getTopicID(), userID, discussionTitle, discussionContent));
             }
         });
     }
 
-    private void showMenu(View view){
-        PopupMenu hamb_menu = new PopupMenu(AddDiscussionActivity.this,view);
-        hamb_menu.getMenuInflater().inflate(R.menu.hamburger_menu,hamb_menu.getMenu());
-        hamb_menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getItemId() == R.id.home_page)
-                {
-                    //balik ke home
-                    Intent intent = null;
-                    intent = new Intent(AddDiscussionActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else if(menuItem.getItemId() == R.id.courses_page)
-                {
-                    Intent intent = null;
-                    //intent =new Intent(this, c)    //blm ad courses page anjay
-                    //balik ke page courses
-                }
-                else if(menuItem.getItemId() == R.id.account_page)
-                {
-                    //balik ke page account
-                    //Toast.makeText(HomeActivity.this,"udh berhasil",Toast.LENGTH_SHORT).show();
-                    Intent intent = null;
-                    intent = new Intent(AddDiscussionActivity.this, AccountActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                return true;
-            }
-        });
-        hamb_menu.show();
-    }
     private void submitDiscussion(Discussion discussion) {
         Map<String, String> body = new HashMap<String, String>();
         body.put("TopicID", discussion.getTopicID().toString());
@@ -132,6 +89,9 @@ public class AddDiscussionActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Intent intent = new Intent(AddDiscussionActivity.this, DiscussionActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("topic", topic);
+                intent.putExtras(bundle);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
